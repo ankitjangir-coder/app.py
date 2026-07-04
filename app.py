@@ -49,15 +49,18 @@ if st.button("🚀 GENERATE DESIGN RENDER & ESTIMATION DISPATCH"):
         st.markdown(f"**Base Evaluation Value:** INR {calculated_cost:,}/-")
         st.markdown(f"**Safety Margin Total (with 10% Material Protection Buffer):** INR {safety_buffer_cost:,}/-")
         
-        # 5. Fetching Free AI Image Render URLs on Screen UI
-        raw_prompt = f"hyperrealistic 3d render of a premium interior space designed in a clean {design_style} style for a modern {property_type} architecture 8k resolution photorealistic portfolio shot"
+        # 5. FIXED STABLE AI IMAGE PIPELINE (Switching to ultra-stable turbo engine)
+        raw_prompt = f"photorealistic 8k architectural portfolio shot of a luxury interior space, {design_style} style, {property_type} layout, highly detailed, cinematic lighting"
         encoded_query = urllib.parse.quote(raw_prompt)
-        ai_image_url = f"https://image.pollinations.ai/prompt/{encoded_query}?width=1280&height=720&nologo=true"
+        
+        # Using the highly stable default turbo engine to bypass internal server errors
+        ai_image_url = f"https://image.pollinations.ai/prompt/{encoded_query}?width=1024&height=576&nologo=true&private=true"
         
         st.markdown("---")
         st.subheader("🎨 Your Customized 3D Conceptual Spatial Moodboard Preview:")
         
-        # Direct Backup Link so users can view instantly if render is slow
-        st.markdown(f"🔗 *If the image takes time to load, click here to open instantly:* **[View Full 3D Render Concept]({ai_image_url})**")
+        # Backup Click Link
+        st.markdown(f"🔗 *Click here to view or download design concept instantly:* **[View Full 3D Render Concept]({ai_image_url})**")
         
-        st.image(ai_image_url, caption=f"Dynamic Vector Rendering Direction Matching Preference Matrix: {design_style}", use_container_width=True)
+        # Display Image Container
+        st.image(ai_image_url, caption=f"Dynamic Rendering: {design_style}", use_container_width=True)
