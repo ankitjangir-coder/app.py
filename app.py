@@ -49,18 +49,18 @@ if st.button("🚀 GENERATE DESIGN RENDER & ESTIMATION DISPATCH"):
         st.markdown(f"**Base Evaluation Value:** INR {calculated_cost:,}/-")
         st.markdown(f"**Safety Margin Total (with 10% Material Protection Buffer):** INR {safety_buffer_cost:,}/-")
         
-        # 5. FIXED STABLE AI IMAGE PIPELINE (Switching to ultra-stable turbo engine)
+        # 5. ULTRA STABLE FLUX PIPELINE (Bypassing broken server models)
         raw_prompt = f"photorealistic 8k architectural portfolio shot of a luxury interior space, {design_style} style, {property_type} layout, highly detailed, cinematic lighting"
         encoded_query = urllib.parse.quote(raw_prompt)
         
-        # Using the highly stable default turbo engine to bypass internal server errors
-        ai_image_url = f"https://image.pollinations.ai/prompt/{encoded_query}?width=1024&height=576&nologo=true&private=true"
+        # Forcing the completely stable FLUX model to bypass the broken 'sana' server model
+        ai_image_url = f"https://image.pollinations.ai/prompt/{encoded_query}?width=1024&height=576&model=flux&nologo=true"
         
         st.markdown("---")
         st.subheader("🎨 Your Customized 3D Conceptual Spatial Moodboard Preview:")
         
-        # Backup Click Link
+        # Direct stable access link
         st.markdown(f"🔗 *Click here to view or download design concept instantly:* **[View Full 3D Render Concept]({ai_image_url})**")
         
-        # Display Image Container
-        st.image(ai_image_url, caption=f"Dynamic Rendering: {design_style}", use_container_width=True)
+        # Display Image Container directly
+        st.image(ai_image_url, caption=f"Dynamic Rendering Engine: FLUX Model ({design_style})", use_container_width=True)
