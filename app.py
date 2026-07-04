@@ -56,4 +56,8 @@ if st.button("🚀 GENERATE DESIGN RENDER & ESTIMATION DISPATCH"):
         
         st.markdown("---")
         st.subheader("🎨 Your Customized 3D Conceptual Spatial Moodboard Preview:")
+        
+        # Direct Backup Link so users can view instantly if render is slow
+        st.markdown(f"🔗 *If the image takes time to load, click here to open instantly:* **[View Full 3D Render Concept]({ai_image_url})**")
+        
         st.image(ai_image_url, caption=f"Dynamic Vector Rendering Direction Matching Preference Matrix: {design_style}", use_container_width=True)
