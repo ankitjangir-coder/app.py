@@ -30,14 +30,26 @@ if st.button("🚀 GENERATE DESIGN RENDER & ESTIMATION DISPATCH"):
     if not client_name:
         st.warning("⚠️ Action Required: Please enter a valid Client Name to compile reports.")
     else:
-        # Core Matrix Cost Logic Engine Matching Spreadsheet Rules
-        base_rate = 2500
-        if "Silver" in quality_tier:
-            base_rate = 1500
-        elif "Gold" in quality_tier:
-            base_rate = 3000
-        elif "Diamond" in quality_tier:
-            base_rate = 6000
+        # Core Matrix Cost Logic Engine based on Property Type & Quality Framework
+        base_rate = 2500  # Default fallback rate
+        
+        # A. COMMERCIAL PRICING MATRIX
+        if property_type == "Commercial":
+            if "Silver" in quality_tier:
+                base_rate = 3000
+            elif "Gold" in quality_tier:
+                base_rate = 5000
+            elif "Diamond" in quality_tier:
+                base_rate = 8000
+                
+        # B. RESIDENTIAL PRICING MATRIX
+        elif property_type == "Residential":
+            if "Silver" in quality_tier:
+                base_rate = 2500
+            elif "Gold" in quality_tier:
+                base_rate = 3500
+            elif "Diamond" in quality_tier:
+                base_rate = 4500
             
         calculated_cost = carpet_area * base_rate
         safety_buffer_cost = int(calculated_cost * 1.10)
@@ -46,14 +58,15 @@ if st.button("🚀 GENERATE DESIGN RENDER & ESTIMATION DISPATCH"):
         st.success(f"✔ Project Profile Processing Complete for {client_name}!")
         
         st.subheader("📊 Architectural Project Metric Specifications")
+        st.markdown(f"**Selected Property Type:** {property_type}")
+        st.markdown(f"**Selected Material Tier:** {quality_tier}")
+        st.markdown(f"**Applied Base Rate:** INR {base_rate}/- per Sqft")
         st.markdown(f"**Base Evaluation Value:** INR {calculated_cost:,}/-")
         st.markdown(f"**Safety Margin Total (with 10% Material Protection Buffer):** INR {safety_buffer_cost:,}/-")
         
-        # 5. ULTRA STABLE FLUX PIPELINE (Bypassing broken server models)
+        # 5. ULTRA STABLE FLUX PIPELINE
         raw_prompt = f"photorealistic 8k architectural portfolio shot of a luxury interior space, {design_style} style, {property_type} layout, highly detailed, cinematic lighting"
         encoded_query = urllib.parse.quote(raw_prompt)
-        
-        # Forcing the completely stable FLUX model to bypass the broken 'sana' server model
         ai_image_url = f"https://image.pollinations.ai/prompt/{encoded_query}?width=1024&height=576&model=flux&nologo=true"
         
         st.markdown("---")
